@@ -8,9 +8,17 @@
 }
 
 .header {
+    // this is being inherited to its children who use font-size: inherit;
+    font-size: 1.4rem;
     height: 7rem;
     background-color: #fff;
     border-bottom: var(--color-grey-light-2);
+
+    // flex-grid
+    display: flex;
+    justify-content: space-between;
+    // no stretching no more
+    align-items: center;
 }
 
 .content {
