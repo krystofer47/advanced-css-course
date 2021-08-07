@@ -1,0 +1,24 @@
+/* Reset */
+/* Universal selector */
+/* better with after and before */
+*,
+*::after,
+*::before { 
+    margin: 0;
+    padding: 0;
+
+    /* we had box sizing here initially, but thats bad practice becs changing it would hav ebeen a hustle */
+    box-sizing: inherit;
+}
+
+/* root fontsize for rem */
+html {
+    /* px is bad practice, for people who set a higher default value, so we use % to support e.g visually impaired people */
+    font-size: 62.5%;
+}
+
+/* Set font-family here because it gets inherited */
+body {
+    /* We use inheritance now */
+    box-sizing: border-box;
+}

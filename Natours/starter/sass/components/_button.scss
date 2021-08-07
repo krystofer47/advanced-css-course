@@ -1,0 +1,90 @@
+.btn {
+    /* link is a pseudo class */
+    &:link,
+    &:visited {
+        text-transform: uppercase;
+    /* no underline and defualt hover effects */
+    text-decoration: none;
+    
+    padding: 1.5rem 4rem;
+    
+    /* it was inline text before */
+    display: inline-block;
+    
+    /* make it round */
+    border-radius: 10rem;
+    
+    /* animation with transition */
+    transition: all .2s;
+    
+    /* make this reference for the ::after pseudo element */
+    position: relative;
+    
+    /* we changed font-size on and put it on root, removed it from body */
+    font-size: 1.6rem;
+}
+
+    &:hover {
+    /* move button up a lil on hover */
+        transform: translateY(-.3rem);
+        
+        /* shadow */
+        box-shadow: 0 1rem 2rem rgba($color-black, .2);
+        
+        &::after {
+            /* make it bigger */
+            transform: scaleX(1.4) scaleY(1.6);
+            
+            /* CHANGE FROM THE TUTORIAL */
+            /* I wanted it only to do the animation on hover in, not on hover out */
+            /* transform always on initial state <- FOR BOTH ANIMATIONS */
+            /* transform on the other state <- ONE WAY ANIMATION */
+            transition: all .4s;
+            opacity: 0;
+        }
+    }
+    
+    &:active {
+        /* get a nice pressed feeling */
+        /* related to initial link state */
+        transform: translateY(-.1rem);
+        
+        /* less shadow on the active state to get the feeling its pressed */
+        box-shadow: 0 .5rem 2rem rgba($color-black, .2);
+    }
+    
+    &--white {
+        background-color: $color-white;
+        color: $color-grey-dark;
+        
+        &::after {
+            background-color: $color-white;
+        }
+    }
+    
+    /* pseudo element */
+    &::after {
+        content: "";
+        display: inline-block;
+        height: 100%;
+        width: 100%;
+        border-radius: 10rem;
+        
+        /* place it behind parend */
+        position: absolute;
+        top: 0;
+        left: 0;
+        
+        /* defo behind btn */
+        z-index: -1;
+        
+    }
+    
+    &--animated {
+        /* do the fade in at the start */
+        animation: moveInBottom 0.5s ease-out 0.75s;
+        
+        /* apply 0% styles to initial state */
+        animation-fill-mode: backwards;
+    }
+}

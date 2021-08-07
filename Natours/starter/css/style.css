@@ -1,8 +1,187 @@
-/*
-COLORS:
+/* Reset */
+/* Universal selector */
+/* better with after and before */
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  /* we had box sizing here initially, but thats bad practice becs changing it would hav ebeen a hustle */
+  box-sizing: inherit; }
 
-Light green: #7ed56f
-Medium green: #55c57a
-Dark green: #28b485
+/* root fontsize for rem */
+html {
+  /* px is bad practice, for people who set a higher default value, so we use % to support e.g visually impaired people */
+  font-size: 62.5%; }
 
-*/
+/* Set font-family here because it gets inherited */
+body {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  /* font-size: 16px; */
+  line-height: 1.7;
+  color: #777;
+  /* padding for the box feel */
+  padding: 3rem;
+  /* Reference for position absolute child */
+  position: relative;
+  /* We use inheritance now */
+  box-sizing: border-box; }
+
+/* Animations */
+@keyframes moveInLeft {
+  0% {
+    /* invisible */
+    opacity: 0;
+    /* Move from left  */
+    transform: translateX(-10rem); }
+  80% {
+    transform: translateX(1rem); }
+  100% {
+    /* visible */
+    opacity: 1;
+    transform: translateX(0); } }
+
+@keyframes moveInRight {
+  0% {
+    /* invisible */
+    opacity: 0;
+    /* Move from left  */
+    transform: translateX(10rem); }
+  80% {
+    transform: translateX(-1rem); }
+  100% {
+    /* visible */
+    opacity: 1;
+    transform: translate(0); } }
+
+@keyframes moveInBottom {
+  0% {
+    /* invisible */
+    opacity: 0;
+    /* Move from left  */
+    transform: translateY(5rem); }
+  100% {
+    /* visible */
+    opacity: 1;
+    transform: translate(0); } }
+
+.heading-primary {
+  /* text color shall be white */
+  color: #fff;
+  text-transform: uppercase;
+  /* create distance between text and button */
+  margin-bottom: 6rem; }
+  .heading-primary__text {
+    /* span are defalt inline */
+    display: block; }
+    .heading-primary__text--main {
+      /* font settings */
+      font-size: 6rem;
+      font-weight: 400;
+      letter-spacing: 3.6rem;
+      /* apply animation */
+      animation: moveInLeft 1s ease-out; }
+    .heading-primary__text--sub {
+      display: block;
+      /* font settings */
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: 1.75rem;
+      /* apply animation, shorthand */
+      animation: moveInRight 1s ease-out; }
+
+.btn {
+  /* link is a pseudo class */
+  /* pseudo element */ }
+  .btn:link, .btn:visited {
+    text-transform: uppercase;
+    /* no underline and defualt hover effects */
+    text-decoration: none;
+    padding: 1.5rem 4rem;
+    /* it was inline text before */
+    display: inline-block;
+    /* make it round */
+    border-radius: 10rem;
+    /* animation with transition */
+    transition: all .2s;
+    /* make this reference for the ::after pseudo element */
+    position: relative;
+    /* we changed font-size on and put it on root, removed it from body */
+    font-size: 1.6rem; }
+  .btn:hover {
+    /* move button up a lil on hover */
+    transform: translateY(-0.3rem);
+    /* shadow */
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2); }
+    .btn:hover::after {
+      /* make it bigger */
+      transform: scaleX(1.4) scaleY(1.6);
+      /* CHANGE FROM THE TUTORIAL */
+      /* I wanted it only to do the animation on hover in, not on hover out */
+      /* transform always on initial state <- FOR BOTH ANIMATIONS */
+      /* transform on the other state <- ONE WAY ANIMATION */
+      transition: all .4s;
+      opacity: 0; }
+  .btn:active {
+    /* get a nice pressed feeling */
+    /* related to initial link state */
+    transform: translateY(-0.1rem);
+    /* less shadow on the active state to get the feeling its pressed */
+    box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.2); }
+  .btn--white {
+    background-color: #fff;
+    color: #777; }
+    .btn--white::after {
+      background-color: #fff; }
+  .btn::after {
+    content: "";
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    border-radius: 10rem;
+    /* place it behind parend */
+    position: absolute;
+    top: 0;
+    left: 0;
+    /* defo behind btn */
+    z-index: -1; }
+  .btn--animated {
+    /* do the fade in at the start */
+    animation: moveInBottom 0.5s ease-out 0.75s;
+    /* apply 0% styles to initial state */
+    animation-fill-mode: backwards; }
+
+.header {
+  height: 95vh;
+  /* Image settings and Gradient */
+  background-image: linear-gradient(to right bottom, rgba(85, 197, 122, 0.8), rgba(40, 180, 133, 0.8)), url(../img/hero.jpg);
+  /* Makes it so it scale with viewport width */
+  background-size: cover;
+  /* Crops at the top */
+  background-position: top;
+  /* Cool looking clip */
+  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%); }
+  .header__logo-box {
+    position: absolute;
+    top: 7rem;
+    left: 7rem; }
+  .header__logo {
+    /* width will be figured out by browser */
+    height: 3.5rem; }
+  .header__text-box {
+    /* position itself in the middle */
+    position: absolute;
+    /* relation to parent */
+    top: 40%;
+    left: 50%;
+    /* relation to itself */
+    transform: translate(-50%, -50%);
+    /* Centers all text in the middle, the anchor tag is treated as text */
+    text-align: center; }
+
+/* 
+ .logo:hover {
+    animation: moveInRight 1s ease-out;
+ } 
+ */
